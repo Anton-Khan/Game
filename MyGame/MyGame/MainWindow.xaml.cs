@@ -62,7 +62,7 @@ namespace MyGame
             fps.ProcessChanged += Fps_ProcessChanged;
             fps.ProcessCompleted += Fps_ProcessCompleted;
 
-            this.PreviewKeyDown += Field_KeyDown;
+            this.PreviewKeyUp += Field_KeyUp;
             this.Closed += MainWindow_Closed;
             this.SizeChanged += MainWindow_SizeChanged;
 
@@ -99,7 +99,7 @@ namespace MyGame
             field.Children.Add(you.Direction);
         }
 
-        private void Field_KeyDown(object sender, KeyEventArgs e)
+        private void Field_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             { 
