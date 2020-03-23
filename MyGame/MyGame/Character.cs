@@ -63,7 +63,7 @@ namespace MyGame
             center = new Pos();
             center.x = pos.x + Radius;
             center.y = pos.y + Radius;
-            Speed = 0.01f;
+            Speed = 0.0f;
             Canvas.SetLeft(_person, pos.x);
             Canvas.SetTop(_person, pos.y);
         }
@@ -138,6 +138,7 @@ namespace MyGame
                 SecondCooldown--;
             if (!((pos.x < nextPos.x + 1 && pos.x > nextPos.x - 1) && (pos.y < nextPos.y + 1 && pos.y > nextPos.y - 1)))
             {
+                if(Speed != 0) { 
                 pos.x += Way.x * 1 / Speed * 2f;
                 pos.y += Way.y * 1 / Speed * 2f;
                 Radius += Way.y * 1 / Speed * 2f;
@@ -145,6 +146,7 @@ namespace MyGame
                 center.y = pos.y + Radius;
                 Canvas.SetLeft(_person, pos.x - _person.Width / 2);
                 Canvas.SetTop(_person, pos.y - _person.Height / 2);
+                }
                 return true;
             }
             else

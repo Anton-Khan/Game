@@ -28,3 +28,10 @@ C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\MyGame.csproj.GenerateRe
 C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\MyGame.csproj.CoreCompileInputs.cache
 C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\MyGame.exe
 C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\MyGame.pdb
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\bin\Debug\DevExpress.Mvvm.dll
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\bin\Debug\DevExpress.Mvvm.UI.dll
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\bin\Debug\DevExpress.Mvvm.pdb
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\bin\Debug\DevExpress.Mvvm.UI.pdb
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\MyGame.csproj.CopyComplete
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\PlayerForm.g.cs
+C:\Users\Khan\Desktop\OPGL\Game\MyGame\MyGame\obj\Debug\PlayerForm.baml

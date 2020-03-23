@@ -31,6 +31,7 @@ namespace MyGame
     {
         Character you;
         Character enemy;
+        
 
         List<Skill> skills;
 
@@ -46,29 +47,57 @@ namespace MyGame
         public MainWindow()
         {
             InitializeComponent();
+            
 
 
             you = new Character(new Pos(10, 300));
             field.Children.Add(you.Person);
 
-            enemy = new Character(new Pos(400,300));
+            enemy = new Character(new Pos(560,300));
+            enemy.nextPos.x = enemy.Pos.x;
+            enemy.nextPos.y = enemy.Pos.y;
+            Network.enemyPos.x = enemy.Pos.x;
+            Network.enemyPos.y = enemy.Pos.y;
             field.Children.Add(enemy.Person);
 
             skills = new List<Skill>();
-
+            CreateHUD();
             
 
             fps = new Fps();
             fps.ProcessChanged += Fps_ProcessChanged;
             fps.ProcessCompleted += Fps_ProcessCompleted;
 
+            
+
             this.PreviewKeyUp += Field_KeyUp;
             this.Closed += MainWindow_Closed;
             this.SizeChanged += MainWindow_SizeChanged;
+            this.Loaded += MainWindow_Loaded;      
 
             thread = new Thread(fps.Go);
             thread.Start();
+            
+            
+            
+        }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            PlayerForm f = new PlayerForm();
+            f.Show();
+            f.Owner = this;
+
+            f.Closed += F_Closed;
+            Network.Start();
+            Network.Connect();
+
+        }
+
+        private void F_Closed(object sender, EventArgs e)
+        {
+            Network.id = (sender as PlayerForm).Id;
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -97,6 +126,7 @@ namespace MyGame
             }
             you.CreateDirection(dir);
             field.Children.Add(you.Direction);
+            Case();
         }
 
         private void Field_KeyUp(object sender, KeyEventArgs e)
@@ -121,6 +151,7 @@ namespace MyGame
                         GenerateAction();
 
                         you.resetFirstCD();
+                        
                     }
                 break;
                 case Key.E:
@@ -141,8 +172,14 @@ namespace MyGame
             }
         }
 
+        public void Case()
+        {
+            Network.Send(you.nextPos);
+        }
+
         public void GenerateAction()
         {
+            
             
             action = () =>
             {
@@ -150,6 +187,17 @@ namespace MyGame
                 FirstSkillCD.Text = (you.FirstCooldown/20).ToString();
                 SecondSkillCD.Text = (you.SecondCooldown/20).ToString();
                 you.Move(1);
+                
+                if(enemy.nextPos.x != Network.enemyPos.x || enemy.nextPos.y != Network.enemyPos.y)
+                {
+                    enemy.nextPos.x = Network.enemyPos.x;
+                    enemy.nextPos.y = Network.enemyPos.y;
+                    enemy.Normalize();
+                }
+                enemy.Move(1);
+
+
+
                 for (int i = 0; i < skills.Count; i++)
                 {
                     if(skills[i].GetType() == typeof(Bullet))
@@ -299,6 +347,7 @@ namespace MyGame
         }
 
         
+        
         private void Field_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             
@@ -357,6 +406,11 @@ namespace MyGame
         {
             this.x = x;
             this.y = y;
+        }
+
+        public override string ToString()
+        {
+            return $"{x} {y}";
         }
     }
 

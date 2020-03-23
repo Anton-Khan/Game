@@ -10,6 +10,8 @@ namespace MyGame
     class Fps
     {
         private bool _cancelled = false;
+        
+        
 
         public void Canel()
         {
@@ -26,7 +28,7 @@ namespace MyGame
             {
                 if (_cancelled == true)
                     break;
-                Thread.Sleep(6);
+                Thread.Sleep(5);
                 ProcessChanged(1);
 
             }
